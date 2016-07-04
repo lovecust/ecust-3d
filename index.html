@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="//cdn.lovecust.com/images/favicon.png" type="image/x-icon"/>
+	<title>3D Ecust Model - Lovecust</title>
+	<style>
+		html, body {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		body {
+			background: #fff;
+			font-weight: bold;
+		}
+
+		#blocker {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		#instructions {
+			width: 100%;
+			height: 100%;
+			color: #781FEC;
+			display: -webkit-box;
+			display: -moz-box;
+			display: box;
+			-webkit-box-orient: horizontal;
+			-moz-box-orient: horizontal;
+			box-orient: horizontal;
+			-webkit-box-pack: center;
+			-moz-box-pack: center;
+			box-pack: center;
+			-webkit-box-align: center;
+			-moz-box-align: center;
+			box-align: center;
+			color: #ffffff;
+			text-align: center;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body onload="onPageLoaded()">
+<div id="container"></div>
+<div id="blocker">
+	<div id="instructions">
+		<span style="font-size:40px; color: #c469fb;">Click to start your Venture</span><br/>
+		<span style="color: #aaa;">(W, A, S, D = Move, SPACE = Jump, F = Faster, MOUSE = Look Around :-)</span>
+	</div>
+</div>
+<script src="//cdn.lovecust.com/scripts/threejs/three.min.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/AssimpJSONLoader.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/OBJLoader.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/THREE.MeshLine.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/OrbitControls.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/TrackballControls.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/PointerLockControls2.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/Detector.js"></script>
+<script src="//cdn.lovecust.com/scripts/threejs/stats.min.js"></script>
+<script src="modules/scripts/libs.js"></script>
+<script src="modules/scripts/data.js"></script>
+<script src="modules/scripts/geometry-util.js"></script>
+<script src="modules/scripts/main.js"></script>
+</body>
+</html>
