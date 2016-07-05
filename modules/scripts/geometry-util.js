@@ -319,78 +319,7 @@ function addStatic( parent, child ) {
 	parent.add( child );
 
 }
-function handlePosition( cube, config ) {
-	if ( !config || !config.position )
-		return cube;
-	var size = config.size ? config.size.z : 0;
-	cube.position.x = config.position.x;
-	cube.position.y = config.position.y;
-	cube.position.z = config.position.z + size / 2;
-	cube = handleRotation( cube, config );
-	return cube;
-}
-function handleRotation( cube, config ) {
-	if ( !config || !config.rotation )
-		return cube;
-	cube.rotation.x = config.rotation.x;
-	cube.rotation.y = config.rotation.y;
-	cube.rotation.z = config.rotation.z;
-	return cube;
-}
 
-function getVector3( vertices ) {
-	if ( !vertices || !vertices instanceof Array ) {
-		return;
-	}
-	var points = [];
-	for ( var i = 0; i < vertices.length; i += 3 ) {
-		points.push( new THREE.Vector3( vertices[ i ], vertices[ i + 1 ], vertices[ i + 2 ] ) );
-	}
-	return points;
-}
-function getShape( vertices ) {
-	var shape = new THREE.Shape();
-	shape.moveTo( vertices[ 0 ], vertices[ 1 ] );
-	for ( var i = 2; i < vertices.length; i += 2 ) {
-		shape.lineTo( vertices[ i ], vertices[ i + 1 ] );
-	}
-	return shape;
-}
-var loaderTexture, loaderCubeTexture;
-function getMaterial( obj, model ) {
-	// new THREE.MeshBasicMaterial({
-	// 	map: (new THREE.TextureLoader).load(.surface)
-	// });
-	var material, texture;
-	if ( !loaderCubeTexture ) {
-		loaderCubeTexture = new THREE.CubeTextureLoader();
-		loaderCubeTexture.setPath( 'modules/images/' );
-	}
-	if ( !loaderTexture ) {
-		loaderTexture = new THREE.TextureLoader();
-		loaderTexture.setPath( 'modules/images/' );
-	}
-	if ( !model )
-		model = {};
-	var color = obj.color || model.color;
-	var surface = obj.surface || model.surface;
-	var surfaces = obj.surfaces || model.surfaces;
-
-	if ( surfaces )
-		surface = surfaces[ 0 ];
-	if ( color ) {
-		material = new THREE.MeshBasicMaterial( { color: color } );
-	} else if ( surface ) {
-		texture = loaderTexture.load( surface );
-		material = new THREE.MeshBasicMaterial( { map: texture } );
-	} else if ( surfaces ) {
-		texture = loaderCubeTexture.load( surfaces );
-		material = new THREE.MeshBasicMaterial( { color: 0xff00ff, envMap: texture } );
-	} else {
-		material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-	}
-	return material;
-}
 var lichKing;
 function initLichKing() {
 	if ( lichKing ) {
@@ -445,6 +374,7 @@ function initJeep() {
 	}, onProgress, onError );
 }
 
+// @GA
 function initCustomUtils() {
 	THREE.DirectCurve = THREE.Curve.create(
 		function ( points /* array of Vector3 */ ) {
@@ -463,4 +393,80 @@ function initCustomUtils() {
 	setTimeout( function () {
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-77912213-1', 'auto');ga('send', 'pageview');
 	}, 4000 );
+}
+// @GO
+
+
+function handlePosition( cube, config ) {
+	if ( !config || !config.position )
+		return cube;
+	var size = config.size ? config.size.z : 0;
+	cube.position.x = config.position.x;
+	cube.position.y = config.position.y;
+	cube.position.z = config.position.z + size / 2;
+	cube = handleRotation( cube, config );
+	return cube;
+}
+function handleRotation( cube, config ) {
+	if ( !config || !config.rotation )
+		return cube;
+	cube.rotation.x = config.rotation.x;
+	cube.rotation.y = config.rotation.y;
+	cube.rotation.z = config.rotation.z;
+	return cube;
+}
+
+function getVector3( vertices ) {
+	if ( !vertices || !vertices instanceof Array ) {
+		return;
+	}
+	var points = [];
+	for ( var i = 0; i < vertices.length; i += 3 ) {
+		points.push( new THREE.Vector3( vertices[ i ], vertices[ i + 1 ], vertices[ i + 2 ] ) );
+	}
+	return points;
+}
+function getShape( vertices ) {
+	var shape = new THREE.Shape();
+	shape.moveTo( vertices[ 0 ], vertices[ 1 ] );
+	for ( var i = 2; i < vertices.length; i += 2 ) {
+		shape.lineTo( vertices[ i ], vertices[ i + 1 ] );
+	}
+	return shape;
+}
+
+var loaderTexture, loaderCubeTexture;
+function getMaterial( obj, model ) {
+	// new THREE.MeshBasicMaterial({
+	// 	map: (new THREE.TextureLoader).load(.surface)
+	// });
+	var material, texture;
+	if ( !loaderCubeTexture ) {
+		loaderCubeTexture = new THREE.CubeTextureLoader();
+		loaderCubeTexture.setPath( 'modules/images/' );
+	}
+	if ( !loaderTexture ) {
+		loaderTexture = new THREE.TextureLoader();
+		loaderTexture.setPath( 'modules/images/' );
+	}
+	if ( !model )
+		model = {};
+	var color = obj.color || model.color;
+	var surface = obj.surface || model.surface;
+	var surfaces = obj.surfaces || model.surfaces;
+
+	if ( surfaces )
+		surface = surfaces[ 0 ];
+	if ( color ) {
+		material = new THREE.MeshBasicMaterial( { color: color } );
+	} else if ( surface ) {
+		texture = loaderTexture.load( surface );
+		material = new THREE.MeshBasicMaterial( { map: texture } );
+	} else if ( surfaces ) {
+		texture = loaderCubeTexture.load( surfaces );
+		material = new THREE.MeshBasicMaterial( { color: 0xff00ff, envMap: texture } );
+	} else {
+		material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+	}
+	return material;
 }
