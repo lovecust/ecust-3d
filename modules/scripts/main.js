@@ -127,12 +127,14 @@ function addPointerListener() {
 	}
 }
 function init() {
-	if ( true && isPointerAvailable() ) {
+	blocker = document.getElementById( "blocker" );
+	instructions = document.getElementById( "instructions" );
+	if ( isPointerAvailable() ) {
 		config.isPointerLockControls = true;
 		config.isTrackballControls = false;
-		blocker = document.getElementById( "blocker" );
-		instructions = document.getElementById( "instructions" );
-
+	}else{
+		blocker.style.display = 'none';
+		instructions.style.display = 'none';
 	}
 	container = document.getElementById( "container" );
 
